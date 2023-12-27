@@ -22,20 +22,4 @@ class PostTest(TestCase):
             self.assertEqual(post.is_published, True)
         def test_published_post_filtering(self):
             posts = Post.published.all()
-            self.assertEqual(posts.count(),1)
-""""
-class BlogPostListSerializer(serializers.ModelSerializer):
-    preview_text = serializers.SerializerMethodfield()
-
-    def get_preview_text(self, post):
-        return post.get_text_preview()
-    
-    class Meta:
-        model = Post
-        fields = ('title', 'author', 'created_date', 'preview_text')
-
-
-class BlogPostViewSet(viewsets.ModelViewSet):
-    serializer_class = BlogPostListSerializer
-    queryset = Post.objects.all()
-    """
+            self.assertEqual(posts.count(), 1)
