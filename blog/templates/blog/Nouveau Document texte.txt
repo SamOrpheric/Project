@@ -1,0 +1,76 @@
+############## Premier fichier ################### (post_list.html)
+<html>
+<head>
+    <title>My super blog</title>
+</head>
+
+<body>
+    <div>
+        <h1><a href="/">На главную</a></h1>
+    </div>
+
+    <div>
+        <p>Дата публикации: 01.01.1994, 12:15</p>
+        <h2><a href="">Заголовок записи в блоге</a></h2>
+        <p>
+            Небольшое описание записи
+        </p>
+    </div>
+    <div>
+        <p>Дата публикации: 01.01.1994, 12:15</p>
+        <h2><a href="">Заголовок записи в блоге</a></h2>
+        <p>
+            Небольшое описание записи
+        </p>
+    </div>
+    <div>
+        <p>Дата публикации: 01.01.1994, 12:15</p>
+        <h2><a href="">Заголовок записи в блоге</a></h2>
+        <p>
+            Небольшое описание записи
+        </p>
+    </div>
+</body>
+</html>
+
+############## Deuxieme fichier ################### (base.html)
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>мой первый блог</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css ">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css ">
+    <link rel="stylesheet" href="{% static 'blog/css/theme.css' %}">
+</head>
+
+<body>
+    <div>
+        <h1><a href="/">На главную</a></h1>
+    </div>
+    <div>
+        {% for post in posts %}
+        <p>Дата публикации:{{ post.published_date}}</p>
+        <h2><a href="">{{ post.title }}</a></h2>
+        <p>{{ post.text|linebreaksbr}} </p>
+        {% endfor %}
+    </div>
+    
+</body>
+
+</html>
+############## Troisieme fichier ###################(post_edit.html)
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<h1>Новая запись</h1>
+<form method="POST" class="post-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="save btn btn-default">Сохранить</button>
+</form>
+{% endblock %}
+
+
